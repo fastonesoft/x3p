@@ -74,11 +74,11 @@ $active_group = 'default';
 $query_builder = TRUE;
 
 $db['default'] = array(
-	'dsn'	=> 'mysql:host=localhost;port=3306;dbname=xcAuth',
+	'dsn'	=> 'mysql:host=localhost;port=3306;dbname=x3pAuth',
 	'hostname' => 'localhost',
 	'username' => 'root',
 	'password' => 'stone.2',
-	'database' => 'xcAuth',
+	'database' => 'x3pAuth',
 	'dbdriver' => 'pdo',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
