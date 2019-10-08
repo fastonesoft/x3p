@@ -11,6 +11,8 @@ location / {
 npm install --save axios js-base64 js-md5
 
 # Database
-## table field comment
+## get table fields
 show full columns from tableName
+### table fields columns
+Field Type Collation Null Key Default Extra Privileges Comment
 

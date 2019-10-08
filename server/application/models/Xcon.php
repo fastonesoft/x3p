@@ -361,6 +361,20 @@ class Xcon
 
     /**
      * @param $table
+     * @return mixed
+     * 获取表字段信息，包括注释。
+     * 可以考虑将注释包装成title、validate的组合体
+     */
+    public static function columns($table)
+    {
+        $CI =& get_instance();
+        $query = $CI->db->query("show full columns from $table");
+        self::db_error();
+        return $query->result();
+    }
+
+    /**
+     * @param $table
      * @param $values
      * 存储数据记录
      */
