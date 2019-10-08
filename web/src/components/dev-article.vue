@@ -67,7 +67,7 @@ dfgsdfg
 </template>
 
 <script>
-    import xcon from "../libs/xcon";
+    import $ from "../libs/xcon";
 
     export default {
         data() {
@@ -100,7 +100,7 @@ dfgsdfg
                     case 'logout': {
                         this.$Message.info('退出登录');
 
-                        this.$.gets('/home/logout')
+                        $.gets('/home/logout')
                             .then(() => {
                                 // 清除用户信息
                                 this.$store.commit('userSet', null);
@@ -108,7 +108,7 @@ dfgsdfg
                                 this.$store.commit('menuSet', []);
                                 this.$store.commit('timeSet', []);
                                 // 清楚session
-                                xcon.stateClear();
+                                $.stateClear();
                                 this.$router.replace('/vlogin');
                             })
                             .catch(error => {
@@ -265,6 +265,7 @@ dfgsdfg
         margin: 16px 0;
     }
 
+    /*分割线*/
     .split {
         border: 1px solid #e8eaec;
         border-radius: 4px;

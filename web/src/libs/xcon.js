@@ -1,4 +1,7 @@
 import md5 from 'js-md5'
+import axios from 'axios'
+import router from '../router'
+
 let base64 = require('js-base64').Base64;
 
 // 日期格式
@@ -43,9 +46,8 @@ let pageData = function (datas, index, size) {
 let stateClear = function () {
     sessionStorage.clear();
 };
-
 let stateRead = function () {
-    let state_string = sessionStorage.getItem("xc-store");
+    let state_string = sessionStorage.getItem("x3p-store");
     if (state_string) {
         let state_json = base64.decode(state_string);
         return JSON.parse(state_json);
@@ -53,10 +55,9 @@ let stateRead = function () {
         return {};
     }
 };
-
 let stateWrite = function (state) {
     let state_json = JSON.stringify(state);
-    sessionStorage.setItem("xc-store", base64.encode(state_json))
+    sessionStorage.setItem("x3p-store", base64.encode(state_json))
 };
 
 // 数组、对象不空检测
@@ -73,7 +74,6 @@ let arrsDel = function (arrs, key, keyValue) {
     });
     return arrs;
 };
-
 let arrsEdit = function (arrs, key, keyValue, value) {
     arrs.forEach((item, index) => {
         if (item[key] === keyValue) {
@@ -83,9 +83,70 @@ let arrsEdit = function (arrs, key, keyValue, value) {
     return arrs;
 };
 
+// 以下是axios请求内容改造
+let axio = axios.create();
+let axio_local = axios.create({
+    withCredentials: true,
+    baseURL: 'http://localhost/',
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+});
+let is_local = location.hostname === 'localhost';
+let ajax = is_local ? axio_local : axio;
+
+let gets = function (url) {
+    return new Promise(function (resolve, reject) {
+        ajax.get(url).then(res => {
+            // 输出请求结果，调试用
+            is_local && window.console.log(res);
+            if (res && res.data && res.data.code) {
+                // code != 0 => error
+                if (res.data.code !== -1) {
+                    reject(res.data.data);
+                } else {
+                    router.replace('/vlogin');
+                }
+            } else {
+                resolve(res.data.data)
+            }
+        }).catch(error => {
+            // 输出请求结果，调试用
+            is_local && window.console.log('出错：调试信息=>' + error);
+            reject('数据请求失败')
+        })
+    })
+};
+let posts = function (url, data) {
+    let param = data || {};
+    return new Promise(function (resolve, reject) {
+        ajax.post(url, param).then(res => {
+            // 输出请求结果，调试用
+            is_local && window.console.log(res);
+            if (res && res.data && res.data.code) {
+                // code != 0 => error
+                if (res.data.code !== -1) {
+                    reject(res.data.data);
+                } else {
+                    router.replace('/vlogin');
+                }
+            } else {
+                resolve(res.data.data)
+            }
+        }).catch(error => {
+            // 输出请求结果，调试用
+            is_local && window.console.log('出错：调试信息=>' + error);
+            // 正常的结果提示
+            reject('数据提交失败')
+        })
+    })
+};
+
+let all = axios.all;
+let spread = axios.spread;
+
 export default {
     dateFormat, pageData,
     stateClear, stateRead, stateWrite,
-    arrsDel, arrsEdit,
-    md5, base64, isNotNull
+    arrsDel, arrsEdit, isNotNull,
+    md5, base64,
+    gets, posts, all, spread
 };
