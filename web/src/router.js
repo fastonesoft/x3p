@@ -4,16 +4,16 @@ import Router from 'vue-router'
 Vue.use(Router);
 
 export default new Router({
-  routes: [
-    {
-      path: '/',
-      name: '/home',
-      component: () => import( './views/Home.vue')
-    },
-          {
-      path: '/about',
-      name: '/about',
-      component: () => import( './views/About.vue')
-    },
-  ]
+    routes: [
+        {
+            path: '/',
+            name: '/vhome',
+            component: () => import( './views/Home.vue')
+        },
+        {
+            path: '/vlogin',
+            name: '/vlogin',
+            component: () => import( './views/Login.vue')
+        },
+    ]
 })

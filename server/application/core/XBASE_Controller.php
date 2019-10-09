@@ -12,7 +12,8 @@ class XBASE_Controller extends CI_Controller
     {
         parent::__construct();
 
-        $this->userinfor = $this->session->userdata('XcSession');
+        $this->userinfor = $this->session->userdata('X3pSession');
+
         // 跨域测试，发布的时候禁用
         Xcon::cros();
     }
@@ -41,6 +42,11 @@ class XC_Controller extends XBASE_Controller
 //
 //            Xcon::add('xcAction', compact('id', 'uid', 'action', 'method', 'name'));
 //        }
+
+        Xcon::loginCheck(function ($userinfor) {
+            $result = Xcon::getsBy('xvGroup', null, 'id');
+            Xcon::json(Xcon::NO_ERROR, $result);
+        });
     }
 
 }

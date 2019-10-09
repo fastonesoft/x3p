@@ -67,7 +67,8 @@ class Xcon
         $CI->session->sess_destroy();
     }
 
-    public static function errorCheck($success)
+    // 统一出错获取
+    public static function errorCatch($success)
     {
         try {
             call_user_func($success);
@@ -78,7 +79,7 @@ class Xcon
 
     public static function loginCheck($success)
     {
-        self::errorCheck(function () use ($success) {
+        self::errorCatch(function () use ($success) {
             // 登录检测
             $CI =& get_instance();
             $userinfor = $CI->userinfor;
@@ -165,7 +166,8 @@ class Xcon
     }
 
     // 统计记录数
-    public static function count($table, $where) {
+    public static function count($table, $where)
+    {
         $CI =& get_instance();
         $CI->db->get_where($table, $where);
         return $CI->db->count_all_results();
@@ -371,6 +373,25 @@ class Xcon
         $query = $CI->db->query("show full columns from $table");
         self::db_error();
         return $query->result();
+    }
+
+    public static function tables()
+    {
+        $CI =& get_instance();
+        $tables = $CI->db->list_tables();
+        self::db_error();
+        return $tables;
+    }
+
+    public static function tables_filter($name)
+    {
+        $tables = self::tables();
+
+        $result = [];
+        foreach ($tables as $table) {
+            strpos($table, $name) !== false && array_push($result, $table);
+        }
+        return $result;
     }
 
     /**

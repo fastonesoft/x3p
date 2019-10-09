@@ -7,7 +7,7 @@ class Home extends XBASE_Controller
     // 首页内容
     public function index()
     {
-        $result = Xcon::columns('ci_sessions');
+        $result = Xcon::tables_filter('sessi');
         Xcon::json(Xcon::NO_ERROR, $result);
     }
 
