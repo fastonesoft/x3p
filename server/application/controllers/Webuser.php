@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class User extends XC_Controller
+class Webuser extends XC_Controller
 {
 
     public function index()

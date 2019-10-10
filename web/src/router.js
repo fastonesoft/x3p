@@ -16,7 +16,7 @@ export default new Router({
             component: () => import( './views/Home.vue')
         },
         {
-            path: '/vlogin/infor',
+            path: '/vlogin',
             name: '/vlogin',
             component: () => import( './views/Login.vue')
         },

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Home extends XBASE_Controller
+class Web extends XBASE_Controller
 {
 
     // 首页内容

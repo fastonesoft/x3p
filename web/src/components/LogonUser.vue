@@ -1,6 +1,6 @@
 <template>
     <div class="form">
-        <i-col class="title">{{title}}</i-col>
+        <div class="title">{{title}}</div>
         <Form ref="form" :model="form" :rules="rule">
             <FormItem prop="id">
                 <Input type="text" prefix="md-contact" v-model="form.id" size="large" :maxlength="20"
@@ -20,13 +20,24 @@
 </template>
 
 <script>
-    import xcon from '../libs/xcon'
+    import $ from '../libs/xcon'
 
     export default {
-        name: "dev-login",
+        name: "LogonUser",
 
         props: {
-            title: String,
+            title: {
+                type: String,
+                default: '校务在线管理系统'
+            },
+            postUrl: {
+                type: String,
+                default: '/web/login'
+            },
+            tokenUrl: {
+                type: String,
+                default: '/web/token'
+            },
         },
 
         data() {
@@ -80,10 +91,10 @@
                     this.$refs[name].validate((valid) => {
                         if (valid) {
                             // 提交this.form服务器端认证
-                            xcon.posts('/home/login', {
+                            $.posts(this.postUrl, {
                                 id: this.form.id,
-                                pass: xcon.md5(this.form.pass),
-                                token: xcon.md5(this.token + xcon.md5(this.form.pass))
+                                pass: $.md5(this.form.pass),
+                                token: $.md5(this.token + $.md5(this.form.pass))
                             })
                                 .then(res => {
                                     // 记录用户信息
@@ -92,7 +103,7 @@
                                     this.$store.commit('menuSet', res.menus);
                                     this.$store.commit('timeSet', new Date().toLocaleString());
                                     // 写入本地
-                                    xcon.stateWrite(this.$store.state);
+                                    $.stateWrite(this.$store.state);
                                     this.$router.replace('/vhome');
                                 })
                                 .catch(error => {
@@ -106,8 +117,8 @@
                 }
             },
         created() {
-            xcon.stateClear();
-            xcon.gets('/home/token')
+            $.stateClear();
+            $.gets(this.tokenUrl)
                 .then(res => {
                     // token
                     this.token = res;
@@ -133,6 +144,6 @@
         letter-spacing: 5px;
         text-shadow: 1px 1px 3px #666;
         color: #197BAB;
-        font-size: 24px;
+        font-size: 28px;
     }
 </style>
