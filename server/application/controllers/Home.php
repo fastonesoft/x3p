@@ -11,11 +11,23 @@ class Home extends XBASE_Controller
         Xcon::json(Xcon::NO_ERROR, $result);
     }
 
-    // 返回当前页面的状态编号
+    public function login()
+    {
+        $result = [];
+        Xcon::json(Xcon::NO_ERROR, $result);
+    }
+
     public function token()
     {
-        $result = Xcon::columns('ci_sessions');
+        $result = md5(session_id());
         Xcon::json(Xcon::NO_ERROR, $result);
+    }
+
+    // 退出
+    public function logout()
+    {
+        Xcon::sess_destroy();
+        Xcon::json(Xcon::NO_ERROR, 1);
     }
 
 }

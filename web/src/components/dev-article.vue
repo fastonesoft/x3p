@@ -106,7 +106,7 @@ dfgsdfg
                                 this.$store.commit('userSet', null);
                                 this.$store.commit('typeSet', []);
                                 this.$store.commit('menuSet', []);
-                                this.$store.commit('timeSet', []);
+                                this.$store.commit('timeSet', null);
                                 // 清楚session
                                 $.stateClear();
                                 this.$router.replace('/vlogin');
