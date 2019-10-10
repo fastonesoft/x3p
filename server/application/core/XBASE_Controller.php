@@ -44,7 +44,7 @@ class XC_Controller extends XBASE_Controller
 //        }
 
         Xcon::loginCheck(function ($userinfor) {
-            $result = Xcon::getsBy('xvGroup', null, 'id');
+            $result = 1;
             Xcon::json(Xcon::NO_ERROR, $result);
         });
     }

@@ -6,10 +6,8 @@ class User extends XC_Controller
 
     public function index()
     {
-        Xcon::loginCheck(function ($userinfor) {
-            $result = Xcon::gets('ci_sessions');
-            Xcon::json(Xcon::NO_ERROR, $result);
-        });
+        $result = 1;
+        Xcon::json(Xcon::NO_ERROR, $result);
     }
 
     public function group()
