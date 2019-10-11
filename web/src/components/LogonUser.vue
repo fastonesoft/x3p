@@ -11,9 +11,7 @@
                        placeholder="输入密码，6-20个字符"/>
             </FormItem>
             <FormItem>
-                <Button type="primary" size="large" @click="loginClick('form')" long
-                        style="background-color: #378CBE;">登录
-                </Button>
+                <Button type="primary" size="large" @click="loginClick('form')" long>登录</Button>
             </FormItem>
         </Form>
     </div>

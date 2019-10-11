@@ -1,14 +1,15 @@
 <template>
     <Logon>
-        <LogonQR slot="login"></LogonQR>
+        <LogonUser slot="login"></LogonUser>
     </Logon>
 </template>
 <script>
     import Logon from '../components/Logon'
     import LogonQR from '../components/LogonQR';
+    import LogonUser from '../components/LogonUser';
 
     export default {
         name: 'Login',
-        components: {Logon, LogonQR}
+        components: {Logon, LogonQR, LogonUser}
     }
 </script>
