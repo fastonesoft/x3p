@@ -1,7 +1,7 @@
-.DS_Store
-
-# SQL
-phpMyAdmin4.8.5
-
 # PHP Storm
 .idea
+
+# vs
+bin
+obj
+.vs

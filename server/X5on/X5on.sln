@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29409.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "X5on.Core", "X5on.Core\X5on.Core.csproj", "{B7357BAA-08F1-4BCA-A68A-96C876052850}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "X5on.Data", "X5on.Data\X5on.Data.csproj", "{1A8DEEF5-F1B6-4AC5-904C-B66B425C39F6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B7357BAA-08F1-4BCA-A68A-96C876052850}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7357BAA-08F1-4BCA-A68A-96C876052850}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7357BAA-08F1-4BCA-A68A-96C876052850}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7357BAA-08F1-4BCA-A68A-96C876052850}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A8DEEF5-F1B6-4AC5-904C-B66B425C39F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A8DEEF5-F1B6-4AC5-904C-B66B425C39F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A8DEEF5-F1B6-4AC5-904C-B66B425C39F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A8DEEF5-F1B6-4AC5-904C-B66B425C39F6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5430AC9B-2E3C-43E6-9CDE-C8D2FD81489F}
+	EndGlobalSection
+EndGlobal
