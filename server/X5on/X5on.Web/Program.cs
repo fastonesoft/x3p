@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace X5on.Core
+namespace X5on.Web
 {
     public class Program
     {
@@ -20,7 +20,6 @@ namespace X5on.Core
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseKestrel();
                     webBuilder.UseStartup<Startup>();
                 });
     }

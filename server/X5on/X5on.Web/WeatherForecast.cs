@@ -1,6 +1,6 @@
 using System;
 
-namespace X5on.Core
+namespace X5on.Web
 {
     public class WeatherForecast
     {

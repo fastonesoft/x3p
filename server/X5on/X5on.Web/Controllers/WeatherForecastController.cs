@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace X5on.Core.Controllers
+namespace X5on.Web.Controllers
 {
     [ApiController]
     [Route("[controller]")]
@@ -35,7 +35,5 @@ namespace X5on.Core.Controllers
             })
             .ToArray();
         }
-
-
     }
 }
