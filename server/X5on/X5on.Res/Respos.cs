@@ -12,7 +12,7 @@ namespace X5on.Res
         private DbContext context;
         private Unitof unitof;
 
-        public Respos(DbContext Context)
+        public Respos(IUnitof unit)
         {
             context = Context;
             unitof = new Unitof(context);
