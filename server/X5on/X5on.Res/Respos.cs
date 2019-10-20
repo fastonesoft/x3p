@@ -9,55 +9,34 @@ namespace X5on.Res
 {
     public abstract class Respos<T> : IRespos<T> where T : class
     {
-        private DbContext context;
-        private Unitof unitof;
+        private DbContext _context;
+        private IUnitof _unitof;
 
-        public Respos(IUnitof unit)
+        public Respos(IUnitof unitof)
         {
-            context = Context;
-            unitof = new Unitof(context);
+            _unitof = unitof;
         }
 
-        public virtual bool Add(T t, bool commit = true)
+        public virtual int Add(T t, bool commit = false)
         {
-            context.Add(t);
-            if (commit)
-            {
-                return unitof.Commit();
-            }
-            else
-            {
-                return false;
-            }
+
+            _context.Add(t);
+            return commit ? _unitof.Commit() : 0;
         }
 
-        public virtual bool Update(T t, bool commit = true)
+        public virtual int Update(T t, bool commit = false)
         {
-            context.Attach(t);
-            context.Entry(t).State = EntityState.Modified;
-            if (commit)
-            {
-                return unitof.Commit();
-            }
-            else
-            {
-                return false;
-            }
+            _context.Attach(t);
+            _context.Entry(t).State = EntityState.Modified;
+            return commit ? _unitof.Commit() : 0;
         }
 
-        public virtual bool Delete(T t, bool commit = true)
+        public virtual int Delete(T t, bool commit = false)
         {
-            if (t == null) return false;
-            context.Remove(t);
+            if (t == null) return 0;
+            _context.Remove(t);
 
-            if (commit)
-            {
-                return unitof.Commit();
-            }
-            else
-            {
-                return false;
-            }
+            return commit ? _unitof.Commit() : 0;
         }
 
 

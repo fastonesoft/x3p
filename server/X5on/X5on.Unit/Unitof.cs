@@ -1,25 +1,25 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
+using X5on.Data;
 
 namespace X5on.Unit
 {
-    public class Unitof:IUnitof, IDisposable
+    public class Unitof : IUnitof, IDisposable
     {
-        private DbContext context;
+        private X5onContext context;
 
-        public Unitof(DbContext Context)
+        public Unitof(X5onContext Context)
         {
             context = Context;
         }
 
-        public bool Commit()
+        public int Commit()
         {
-            return context.SaveChanges() > 0;
+            return context.SaveChanges();
         }
 
         public void Dispose()
         {
-            if(context != null)
+            if (context != null)
             {
                 context.Dispose();
             }

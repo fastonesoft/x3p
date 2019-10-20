@@ -6,10 +6,10 @@ namespace X5on.Res
 {
     public  interface IRespos<T> where T:class 
     {
-        bool Add(T t, bool commit = true);
-        
-        bool Update(T t, bool commit = true);
+        int Add(T t, bool commit = false);
 
-        bool Delete(T t, bool commit = true);
+        int Update(T t, bool commit = false);
+
+        int Delete(T t, bool commit = false);
     }
 }
