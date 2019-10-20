@@ -9,7 +9,6 @@ namespace X5on.Res
 {
     public abstract class Respos<T> : IRespos<T> where T : class
     {
-        private DbContext _context;
         private IUnitof _unitof;
 
         public Respos(IUnitof unitof)
