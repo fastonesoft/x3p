@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.29409.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "X5on.Web", "X5on.Web\X5on.Web.csproj", "{7086AFF6-43F8-470D-852F-D5EEA0B89CAE}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9D263686-C47D-4C42-B416-4B05C1243B8A} = {9D263686-C47D-4C42-B416-4B05C1243B8A}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "X5on.Data", "X5on.Data\X5on.Data.csproj", "{9D263686-C47D-4C42-B416-4B05C1243B8A}"
 EndProject
