@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using System.Text;
 
 using Microsoft.EntityFrameworkCore;
+using X5on.Data;
 using X5on.Unit;
 
 namespace X5on.Res
 {
     public abstract class Respos<T> : IRespos<T> where T : class
     {
-        private IUnitof _unitof;
+        private Unitof _unitof;
+        private X5onContext _context;
 
-        public Respos(IUnitof unitof)
+        public Respos(Unitof unitof)
         {
             _unitof = unitof;
+            _context = _unitof.x5onContext;
         }
 
         public virtual int Add(T t, bool commit = false)

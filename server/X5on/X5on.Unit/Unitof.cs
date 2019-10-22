@@ -7,6 +7,8 @@ namespace X5on.Unit
     {
         private X5onContext context;
 
+        public X5onContext x5onContext { get { return this.context; } }
+
         public Unitof(X5onContext Context)
         {
             context = Context;

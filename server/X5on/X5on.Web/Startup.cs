@@ -28,7 +28,7 @@ namespace X5on.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddDbContext<X5onContext>(x => x.UseMySQL(Configuration.GetConnectionString("Default")));
+            services.AddDbContext<X5onContext>(optionsAction => optionsAction.UseMySQL(Configuration.GetConnectionString("Default")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
