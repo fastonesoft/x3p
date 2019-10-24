@@ -23,10 +23,10 @@ namespace X5on
      )]
     public class X5onWebCoreModule : AbpModule
     {
-        private readonly IHostingEnvironment _env;
+        private readonly IWebHostEnvironment _env;
         private readonly IConfigurationRoot _appConfiguration;
 
-        public X5onWebCoreModule(IHostingEnvironment env)
+        public X5onWebCoreModule(IWebHostEnvironment env)
         {
             _env = env;
             _appConfiguration = env.GetAppConfiguration();

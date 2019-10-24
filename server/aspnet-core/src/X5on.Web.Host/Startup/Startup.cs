@@ -1,21 +1,21 @@
-﻿using System;
-using System.Linq;
-using System.Reflection;
+﻿using Abp.AspNetCore;
+using Abp.AspNetCore.SignalR.Hubs;
+using Abp.Castle.Logging.Log4Net;
+using Abp.Extensions;
+using Castle.Facilities.Logging;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Cors;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Castle.Facilities.Logging;
 using Swashbuckle.AspNetCore.Swagger;
-using Abp.AspNetCore;
-using Abp.Castle.Logging.Log4Net;
-using Abp.Extensions;
+using System;
+using System.Linq;
+using System.Reflection;
 using X5on.Configuration;
 using X5on.Identity;
-
-using Abp.AspNetCore.SignalR.Hubs;
-using Microsoft.AspNetCore.Mvc;
 
 namespace X5on.Web.Host.Startup
 {
@@ -25,17 +25,13 @@ namespace X5on.Web.Host.Startup
 
         private readonly IConfigurationRoot _appConfiguration;
 
-        public Startup(IHostingEnvironment env)
+        public Startup(IWebHostEnvironment env)
         {
             _appConfiguration = env.GetAppConfiguration();
         }
 
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            // MVC
-            //services.AddMvc(
-            //    options => options.Filters.Add(new CorsAuthorizationFilterFactory(_defaultCorsPolicyName))
-            //).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             IdentityRegistrar.Register(services);
             AuthConfigurer.Configure(services, _appConfiguration);
@@ -60,6 +56,12 @@ namespace X5on.Web.Host.Startup
                 )
             );
 
+            // MVC ?
+            services.AddMvcCore(
+                options => options.Filters.Add(new CorsAuthorizationFilterFactory(_defaultCorsPolicyName))
+            ).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+
+
             // Swagger - Enable this line and the related lines in Configure method to enable swagger UI
             services.AddSwaggerGen(options =>
             {
@@ -77,6 +79,7 @@ namespace X5on.Web.Host.Startup
             });
 
             // Configure Abp and Dependency Injection
+            // todo：有问题
             return services.AddAbp<X5onWebHostModule>(
                 // Configure Log4Net logging
                 options => options.IocManager.IocContainer.AddFacility<LoggingFacility>(
@@ -85,7 +88,7 @@ namespace X5on.Web.Host.Startup
             );
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             app.UseAbp(options => { options.UseAbpRequestLocalization = false; }); // Initializes ABP framework.
 
@@ -97,21 +100,21 @@ namespace X5on.Web.Host.Startup
 
             app.UseAbpRequestLocalization();
 
-            //app.UseSignalR(routes =>
-            //{
-            //    routes.MapHub<AbpCommonHub>("/signalr");
-            //});
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<AbpCommonHub>("/signalr");
+            });
 
-            //app.UseMvc(routes =>
-            //{
-            //    routes.MapRoute(
-            //        name: "defaultWithArea",
-            //        template: "{area}/{controller=Home}/{action=Index}/{id?}");
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "defaultWithArea",
+                    template: "{area}/{controller=Home}/{action=Index}/{id?}");
 
-            //    routes.MapRoute(
-            //        name: "default",
-            //        template: "{controller=Home}/{action=Index}/{id?}");
-            //});
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+            });
 
             // Enable middleware to serve generated Swagger as a JSON endpoint
             app.UseSwagger();

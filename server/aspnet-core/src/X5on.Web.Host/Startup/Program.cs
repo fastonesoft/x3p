@@ -12,6 +12,7 @@ namespace X5on.Web.Host.Startup
 
         public static IWebHost BuildWebHost(string[] args)
         {
+            // todo：有问题
             return WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
                 .Build();

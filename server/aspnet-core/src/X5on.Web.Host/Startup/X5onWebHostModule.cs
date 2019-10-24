@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Abp.Modules;
+﻿using Abp.Modules;
 using Abp.Reflection.Extensions;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using X5on.Configuration;
 
 namespace X5on.Web.Host.Startup
@@ -10,10 +10,10 @@ namespace X5on.Web.Host.Startup
        typeof(X5onWebCoreModule))]
     public class X5onWebHostModule: AbpModule
     {
-        private readonly IHostingEnvironment _env;
+        private readonly IHostEnvironment _env;
         private readonly IConfigurationRoot _appConfiguration;
 
-        public X5onWebHostModule(IHostingEnvironment env)
+        public X5onWebHostModule(IHostEnvironment env)
         {
             _env = env;
             _appConfiguration = env.GetAppConfiguration();
