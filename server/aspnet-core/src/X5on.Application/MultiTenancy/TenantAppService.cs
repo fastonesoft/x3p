@@ -43,7 +43,7 @@ namespace X5on.MultiTenancy
             _abpZeroDbMigrator = abpZeroDbMigrator;
         }
 
-        public async Task<TenantDto> Create(CreateTenantDto input)
+        public override async Task<TenantDto> Create(CreateTenantDto input)
         {
             CheckCreatePermission();
 
@@ -106,7 +106,7 @@ namespace X5on.MultiTenancy
             entity.IsActive = updateInput.IsActive;
         }
 
-        public async Task Delete(EntityDto<int> input)
+        public override async Task Delete(EntityDto<int> input)
         {
             CheckDeletePermission();
 

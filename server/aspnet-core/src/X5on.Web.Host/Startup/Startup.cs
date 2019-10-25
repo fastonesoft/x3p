@@ -1,21 +1,22 @@
-﻿using Abp.AspNetCore;
-using Abp.AspNetCore.SignalR.Hubs;
-using Abp.Castle.Logging.Log4Net;
-using Abp.Extensions;
-using Castle.Facilities.Logging;
+﻿using System;
+using System.Linq;
+using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Cors;
+using Microsoft.AspNetCore.Mvc.Cors.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Castle.Facilities.Logging;
 using Swashbuckle.AspNetCore.Swagger;
-using System;
-using System.Linq;
-using System.Reflection;
+using Abp.AspNetCore;
+using Abp.Castle.Logging.Log4Net;
+using Abp.Extensions;
 using X5on.Configuration;
 using X5on.Identity;
+
+using Abp.AspNetCore.SignalR.Hubs;
+using Microsoft.AspNetCore.Mvc;
 
 namespace X5on.Web.Host.Startup
 {
@@ -25,13 +26,17 @@ namespace X5on.Web.Host.Startup
 
         private readonly IConfigurationRoot _appConfiguration;
 
-        public Startup(IWebHostEnvironment env)
+        public Startup(IHostingEnvironment env)
         {
             _appConfiguration = env.GetAppConfiguration();
         }
 
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
+            // MVC
+            services.AddMvc(
+                options => options.Filters.Add(new CorsAuthorizationFilterFactory(_defaultCorsPolicyName))
+            ).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             IdentityRegistrar.Register(services);
             AuthConfigurer.Configure(services, _appConfiguration);
@@ -56,12 +61,6 @@ namespace X5on.Web.Host.Startup
                 )
             );
 
-            // MVC ?
-            services.AddMvcCore(
-                options => options.Filters.Add(new CorsAuthorizationFilterFactory(_defaultCorsPolicyName))
-            ).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
-
-
             // Swagger - Enable this line and the related lines in Configure method to enable swagger UI
             services.AddSwaggerGen(options =>
             {
@@ -79,7 +78,6 @@ namespace X5on.Web.Host.Startup
             });
 
             // Configure Abp and Dependency Injection
-            // todo：有问题
             return services.AddAbp<X5onWebHostModule>(
                 // Configure Log4Net logging
                 options => options.IocManager.IocContainer.AddFacility<LoggingFacility>(
@@ -88,7 +86,7 @@ namespace X5on.Web.Host.Startup
             );
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             app.UseAbp(options => { options.UseAbpRequestLocalization = false; }); // Initializes ABP framework.
 

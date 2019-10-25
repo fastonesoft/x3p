@@ -30,7 +30,7 @@ namespace X5on.Roles
             _userManager = userManager;
         }
 
-        public async Task<RoleDto> Create(CreateRoleDto input)
+        public override async Task<RoleDto> Create(CreateRoleDto input)
         {
             CheckCreatePermission();
 
@@ -62,7 +62,7 @@ namespace X5on.Roles
             return new ListResultDto<RoleListDto>(ObjectMapper.Map<List<RoleListDto>>(roles));
         }
 
-        public async Task<RoleDto> Update(RoleDto input)
+        public override async Task<RoleDto> Update(RoleDto input)
         {
             CheckUpdatePermission();
 
@@ -82,7 +82,7 @@ namespace X5on.Roles
             return MapToEntityDto(role);
         }
 
-        public async Task Delete(EntityDto<int> input)
+        public override async Task Delete(EntityDto<int> input)
         {
             CheckDeletePermission();
 

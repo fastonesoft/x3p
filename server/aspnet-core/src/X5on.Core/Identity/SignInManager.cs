@@ -22,8 +22,7 @@ namespace X5on.Identity
             ILogger<SignInManager<User>> logger,
             IUnitOfWorkManager unitOfWorkManager,
             ISettingManager settingManager,
-            IAuthenticationSchemeProvider schemes,
-            IUserConfirmation<User> userConfirmation) 
+            IAuthenticationSchemeProvider schemes) 
             : base(
                 userManager, 
                 contextAccessor, 
@@ -32,8 +31,7 @@ namespace X5on.Identity
                 logger,
                 unitOfWorkManager,
                 settingManager,
-                schemes,
-                userConfirmation)
+                schemes)
         {
         }
     }
