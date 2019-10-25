@@ -7,6 +7,7 @@ using Abp.Localization;
 
 namespace X5on.EntityFrameworkCore
 {
+    //[DbConfigurationType(typeof(MySql.Data.Entity.MySqlEFConfiguration))]
     public class X5onDbContext : AbpZeroDbContext<Tenant, Role, User, X5onDbContext>
     {
         /* Define a DbSet for each entity of the application */

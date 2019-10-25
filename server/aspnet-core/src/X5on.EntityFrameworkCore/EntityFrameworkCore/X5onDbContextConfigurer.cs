@@ -7,12 +7,12 @@ namespace X5on.EntityFrameworkCore
     {
         public static void Configure(DbContextOptionsBuilder<X5onDbContext> builder, string connectionString)
         {
-            builder.UseMySQL(connectionString);
+            builder.UseMySql(connectionString);
         }
 
         public static void Configure(DbContextOptionsBuilder<X5onDbContext> builder, DbConnection connection)
         {
-            builder.UseMySQL(connection);
+            builder.UseMySql(connection);
         }
     }
 }
