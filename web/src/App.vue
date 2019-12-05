@@ -14,9 +14,11 @@
 <style>
     html, body {
         height: 100%;
+        min-height: 300px;
     }
 
     #app {
         height: 100%;
+        min-height: 300px;
     }
 </style>

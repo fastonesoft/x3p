@@ -6,10 +6,9 @@
                 width="200"
                 :class="{'sider-hide': isCollaped}"
                 collapsible
-                breakpoint="xl"
         >
             <Row>
-                <i-col class="sider-logo-center">
+                <i-col class="sider-logo-center" :class="{'sider-hide': isCollaped}">
                     <img src="../assets/logo.png" alt="" class="sider-logo" :class="{'sider-hide': isCollaped}">
                 </i-col>
             </Row>
@@ -32,7 +31,9 @@
                 </MenuGroup>
             </Menu>
         </Sider>
-        <Layout>
+        <Layout 
+            :class="{'sider-hide': isCollaped}"
+        >
             <Header class="header" style="background: #fff;">
                 <Row>
                     <i-col span="19" class="header-title">
@@ -62,6 +63,12 @@ dfgsdfg
             <Content class="content">
                 <slot></slot>
             </Content>
+            <Row class="footer align-right"
+                :class="{'sider-hide': isCollaped}"
+                style="background: #fff;"
+            >
+            2019 &copy; Fastone
+            </Row>
         </Layout>
     </Layout>
 </template>
@@ -132,22 +139,36 @@ dfgsdfg
 
     /*侧边菜单设置*/
     .sider {
-        z-index: 999;
+        z-index: 2;
     }
 
     .sider-logo-center {
         text-align: center;
+        background: #515a6e;
+        position: fixed!important;
+        top: 0;
+        left: 0;
+        height: 85px;
+        width: 200px;
+        transition: all .2s ease-in-out;
+    }
+    .sider-hide .sider-logo-center {
+        width: 64px;
+        height: 40px;
+        transition: all .2s ease-in-out;
     }
 
     .sider-logo {
         width: 60px;
         height: 60px;
         margin: 10px auto;
+        transition: all .2s ease-in-out;
     }
 
     .sider-hide .sider-logo {
         width: 35px;
         height: 35px;
+        transition: all .2s ease-in-out;
     }
 
     .ivu-badge-count {
@@ -174,9 +195,19 @@ dfgsdfg
         display: none;
     }
 
-    /*顶部菜单设置*/
+    /* 顶部菜单设置 */
     .header {
+        z-index: 2;
         box-shadow: 0 2px 2px rgba(0, 0, 0, .05);
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 200px;
+        transition: all .2s ease-in-out;
+    }
+    .sider-hide .header {
+        left: 64px;
+        transition: all .2s ease-in-out;
     }
 
     .header-title {
@@ -185,9 +216,38 @@ dfgsdfg
         cursor: default;
     }
 
+    /* 正文 */
     .content {
-        padding: 16px;
-        transition: all .5s ease-in-out;
+        z-index: 1;
+        border: 1px solid #e8eaec;
+        border-radius: 4px;
+        padding: 10px;
+        margin: 70px 6px;
+        background: #fff;
+        transition: all .2s ease-in-out;
+    }
+    .content:hover {
+        border-color: #eee;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+        transition: all 0.2s ease-in-out;
+    }
+
+    .footer {
+        z-index: 2;
+        box-shadow: 0 -2px 3px rgba(0, 0, 0, 0.05);
+        position: fixed!important;
+        bottom: 0;
+        right: 0;
+        left: 200px;
+        height: 64px;
+        line-height: 64px;
+        clear: both;
+        padding-right: 10px!important;
+        transition: all .2s ease-in-out;
+    }
+    .sider-hide .footer {
+        left: 64px;
+        transition: all .2s ease-in-out;
     }
 
     .data-collect {
